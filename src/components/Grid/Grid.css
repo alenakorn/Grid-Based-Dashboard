@@ -1,0 +1,46 @@
+.gridContainer {
+  display: grid;
+  gap: 24px;
+}
+
+.gridItem {
+  border: 1px solid #F9F3EF;
+  border-radius: 8px;
+  padding: 24px;
+  transition: box-shadow .3s ease;
+  position: relative;
+
+  min-height: 600px;
+
+  &:hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+
+    .gridItemDeleteBtn {
+      display: block;
+    }
+  }
+}
+
+.gridItemDeleteBtn {
+  padding: 8px;
+  border: none;
+  background: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  transition: background-color .3s ease;
+  display: none;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    background-color: #F9F3EF;
+  }
+}

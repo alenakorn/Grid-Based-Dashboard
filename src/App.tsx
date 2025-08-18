@@ -1,10 +1,12 @@
 import React from 'react';
+import { Dashboard } from './components';
+import { DashboardProvider } from './context';
 
 function App() {
   return (
-    <div className="App">
-      Dashboard content
-    </div>
+    <DashboardProvider>
+      <Dashboard />
+    </DashboardProvider>
   );
 }
 
