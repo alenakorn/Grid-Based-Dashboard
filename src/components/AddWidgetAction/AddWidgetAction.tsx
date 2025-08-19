@@ -16,6 +16,7 @@ const AddWidgetAction = () => {
   const handleSubmitNewWidget = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const form = e.currentTarget;
     const formData = new FormData(e.currentTarget);
     const data = {
       type: formData.get('type'),
@@ -23,8 +24,10 @@ const AddWidgetAction = () => {
       description: formData.get('description'),
     };
 
+    form.reset();
     handleAddBlock(data as AddWidgetData);
     setIsOpen(false);
+    setWidgetType(DEFAULT_WIDGET_TYPE);
   };
 
   return (

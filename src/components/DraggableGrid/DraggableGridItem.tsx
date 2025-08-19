@@ -1,6 +1,7 @@
 import React from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable, AnimateLayoutChanges, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
+import { useDashboard } from '../../hooks';
 
 import { DraggableGridItemProps } from '../../types/dashboard';
 import { DragAndDropIcon, TrashIcon } from '../Icons';
@@ -13,11 +14,16 @@ const WidgetBlock = {
   lineChart: LineChartWidget,
   barChart: BarChartWidget,
   text: SimpleTextWidget,
+  empty: () => <div className="emptyWidget" />,
 };
 
-export const DraggableGridItem = ({ item, isOverlay, handleRemove }: DraggableGridItemProps) => {
-  const animateLayoutChanges: AnimateLayoutChanges = (args) =>
-    defaultAnimateLayoutChanges({ ...args, wasDragging: true });
+export const DraggableGridItem = ({ item, isOverlay, handleRemove, activeItemId }: DraggableGridItemProps) => {
+  const { withEmptyCells } = useDashboard();
+
+  const animateLayoutChanges: AnimateLayoutChanges = ({ wasDragging, ...args }) => {
+    if (item.type !== 'empty') return false;
+    return defaultAnimateLayoutChanges({  ...args, wasDragging: false });
+  };
 
   const {
     attributes,
@@ -28,10 +34,14 @@ export const DraggableGridItem = ({ item, isOverlay, handleRemove }: DraggableGr
     isDragging,
   } = useSortable({ id: item.id, animateLayoutChanges });
 
-  const style: React.CSSProperties = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
+  const isActive = activeItemId === item.id;
+  const style: React.CSSProperties =
+    withEmptyCells && !isActive
+      ? {}
+      : {
+        transform: CSS.Transform.toString(transform),
+        transition,
+      };
 
   const WidgetComponent = WidgetBlock[item.type];
 

@@ -50,6 +50,15 @@
   }
 }
 
+.gridItem:has(.emptyWidget) {
+  border: 3px dashed #f7f5f2;
+
+  .itemDragBtn,
+  .itemDeleteBtn {
+    display: none;
+  }
+}
+
 .gridItem.overlay {
   box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 

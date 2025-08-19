@@ -11,6 +11,7 @@ import {
 } from '@dnd-kit/core';
 import {
   arrayMove,
+  arraySwap,
   SortableContext,
   rectSortingStrategy,
 } from '@dnd-kit/sortable';
@@ -23,7 +24,7 @@ import { DraggableGridItem } from './DraggableGridItem';
 import './DraggableGrid.css';
 
 export const DraggableGrid = () => {
-  const { blocks, setBlocks } = useDashboard();
+  const { blocks, withEmptyCells, setBlocks, handleRemove } = useDashboard();
 
   const [activeItem, setActiveItem] = useState<WidgetData | null>(null);
 
@@ -35,12 +36,6 @@ export const DraggableGrid = () => {
     })
   );
 
-  const handleRemove = (id: string) => {
-    const updated = blocks.filter(item => item?.id !== id);
-    setBlocks(updated);
-    sessionStorage.setItem('grid-items', JSON.stringify(updated));
-  };
-
   const handleDragStart = ({ active }: DragStartEvent) => {
     const item = blocks.find((b) => b.id === active.id);
     if (item) {
@@ -51,10 +46,18 @@ export const DraggableGrid = () => {
   const handleDragEnd = ({ active, over }: DragEndEvent) => {
     setActiveItem(null);
 
+    const isOverNonEmptyCell = blocks.findIndex(i => i.id === over?.id && i.type !== 'empty') > -1;
+    if (withEmptyCells && isOverNonEmptyCell) {
+      return;
+    }
+
     if (over && active.id !== over.id) {
       const oldIndex = blocks.findIndex(i => i.id === active.id);
       const newIndex = blocks.findIndex(i => i.id === over.id);
-      const updated = arrayMove(blocks, oldIndex, newIndex);
+
+      const updated = withEmptyCells
+        ? arraySwap(blocks, oldIndex, newIndex)
+        : arrayMove(blocks, oldIndex, newIndex);
 
       setBlocks(updated);
       sessionStorage.setItem('grid-items', JSON.stringify(updated));
@@ -74,7 +77,12 @@ export const DraggableGrid = () => {
       >
         <ul className="gridContainer">
           {blocks?.map((item) => (
-            <DraggableGridItem key={item.id} item={item} handleRemove={handleRemove} />
+            <DraggableGridItem
+              key={item.id}
+              item={item}
+              handleRemove={handleRemove}
+              activeItemId={activeItem?.id}
+            />
           ))}
         </ul>
       </SortableContext>
