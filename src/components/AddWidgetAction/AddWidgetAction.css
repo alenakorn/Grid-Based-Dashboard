@@ -26,6 +26,11 @@
   flex-direction: column;
   gap: 16px;
 
+  & label {
+    margin-bottom: 4px;
+  }
+
+  & textarea,
   & select,
   & input {
     width: 100%;
@@ -34,5 +39,11 @@
     border-radius: 4px;
     outline: none;
     border: 1px solid #d1d5db;
+  }
+
+  & textarea {
+    height: inherit;
+    resize: vertical;
+    overflow-y: auto;
   }
 }

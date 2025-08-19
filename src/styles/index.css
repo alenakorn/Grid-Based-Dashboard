@@ -7,6 +7,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #2E2A26;
+
+  * {
+    color: #2E2A26;
+    text-align: left;
+
+    h2 {
+      margin: 0 0 24px;
+    }
+
+    p {
+      font-weight: 400;
+      margin: 0 0 24px;
+    }
+  }
 }
 
 code {

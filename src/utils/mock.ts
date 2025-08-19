@@ -4,11 +4,6 @@ export interface LineChartData {
   uv: number;
 }
 
-export interface TextBlockData {
-  title: string;
-  content: string;
-}
-
 export const chartData: LineChartData[] = [
   {
     name: 'Jan',
@@ -47,28 +42,7 @@ export const chartData: LineChartData[] = [
   },
 ];
 
-export const textBlockData: TextBlockData[] = [
-  {
-    title: 'Sales Summary',
-    content: 'Total sales for this quarter have increased by 15% compared to the previous quarter. Our team has exceeded the target by $50,000.'
-  },
-  {
-    title: 'Project Status',
-    content: 'Dashboard development is 80% complete. Remaining tasks include testing, performance optimization, and final review.'
-  },
-  {
-    title: 'Team Updates',
-    content: 'We have successfully onboarded 3 new team members this month. Training sessions are scheduled for next week.'
-  },
-  {
-    title: 'Performance Metrics',
-    content: 'Website traffic has increased by 23% this month. Average session duration is 4.5 minutes, up from 3.2 minutes last month.'
-  },
-  {
-    title: 'Important Notice',
-    content: 'System maintenance is scheduled for this weekend from 2 AM to 6 AM. All services will be temporarily unavailable during this time.'
-  }
-];
+export const textBlockData = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec blandit nibh nisl, non varius erat scelerisque pretium. Donec purus nibh, vulputate sit amet aliquam quis, consectetur quis diam. Fusce at mattis dui, et interdum massa. Quisque hendrerit mollis purus, vitae efficitur metus finibus sit amet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam justo nulla, tincidunt et efficitur sed, vulputate eu enim. Maecenas vitae odio turpis. Quisque ut mi vel nisi faucibus sagittis sit amet vel dolor.';
 
 export const mockDataSets = {
   lineChart: chartData,

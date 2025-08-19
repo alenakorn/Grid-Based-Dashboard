@@ -6,16 +6,12 @@ const BarChartWidget = ({ data, name, description }: WidgetData) => {
     <>
       {name && <h2>{name}</h2>}
       {description && <p>{description}</p>}
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%" height={494}>
         <BarChart
-          width={500}
-          height={300}
           data={data}
           margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
+            right: 0,
+            left: -20,
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -23,8 +19,8 @@ const BarChartWidget = ({ data, name, description }: WidgetData) => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" fill="#e07a5f" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-          <Bar dataKey="uv" fill="#81b29a" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+          <Bar dataKey="pv" fill="#e07a5f" />
+          <Bar dataKey="uv" fill="#81b29a" />
         </BarChart>
       </ResponsiveContainer>
     </>

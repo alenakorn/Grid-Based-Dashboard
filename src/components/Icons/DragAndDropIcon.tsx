@@ -4,6 +4,7 @@ const DragAndDropIcon = (props: React.SVGProps<SVGSVGElement>) => (
     width="24"
     height="24"
     viewBox="0 0 48 48"
+    fill="currentColor"
     {...props}
   >
     <g fillRule="evenodd" clipRule="evenodd">

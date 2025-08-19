@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDashboard } from '../../hooks';
 import { AddWidgetData } from '../../types/dashboard';
+import { mockDataSets } from '../../utils/mock';
 import { Modal } from '../index';
 
 import './AddWidgetAction.css';
@@ -8,6 +9,7 @@ import './AddWidgetAction.css';
 const AddWidgetAction = () => {
   const { addBlock } = useDashboard();
   const [isOpen, setIsOpen] = useState(false);
+  const [widgetType, setWidgetType] = useState('barChart');
 
   const handleSubmitNewWidget = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,13 +30,33 @@ const AddWidgetAction = () => {
       <button className="addWidgetBtn" onClick={() => setIsOpen(true)}>Add new widget</button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Add new widget">
         <form className="addWidgetForm" onSubmit={handleSubmitNewWidget}>
-          <select name="type">
-            <option value="barChart" label="Bar chart" selected/>
-            <option value="lineChart" label="Line chart"/>
-            <option value="text" label="Simple text block"/>
-          </select>
-          <input name="name" type="text" placeholder="Widget name" />
-          <input name="description" type="text" placeholder="Widget description" />
+          <div>
+            <label htmlFor="type">Type</label>
+            <select id="type" name="type" defaultValue="barChart" onChange={(e) => setWidgetType(e.target.value)}>
+              <option value="barChart" label="Bar chart" />
+              <option value="lineChart" label="Line chart" />
+              <option value="text" label="Simple text block" />
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Enter widget name" required={widgetType === 'text'} maxLength={50} />
+          </div>
+
+          <div>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Enter widget description"
+              required={widgetType === 'text'}
+              maxLength={widgetType !== 'text' ? 100 : 600}
+              defaultValue={widgetType === 'text' ? mockDataSets.textBlocks : ''}
+              rows={5}
+            />
+          </div>
+
           <button type="submit" className="addWidgetFormSubmit">Add</button>
         </form>
       </Modal>
