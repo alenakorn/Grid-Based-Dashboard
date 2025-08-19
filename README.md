@@ -12,9 +12,12 @@ git clone <repository-url>
 cd grid-based-dashboard
 
 # 2. Install dependencies
+npm i -g pnpm
+
+# 3. Install dependencies
 pnpm install
 
-# 3. Start the development server
+# 4. Start the development server
 pnpm start
 ```
 

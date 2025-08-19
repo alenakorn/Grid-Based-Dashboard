@@ -45,9 +45,9 @@ const AddWidgetAction = () => {
               defaultValue={DEFAULT_WIDGET_TYPE}
               onChange={(e) => setWidgetType(e.target.value)}
             >
-              <option value="barChart" label="Bar chart" />
-              <option value="lineChart" label="Line chart" />
-              <option value="text" label="Simple text block" />
+              <option value="barChart" label="Bar chart"/>
+              <option value="lineChart" label="Line chart"/>
+              <option value="text" label="Simple text block"/>
             </select>
           </div>
 

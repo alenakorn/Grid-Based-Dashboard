@@ -1,7 +1,7 @@
 import { createContext, useState, ReactNode } from 'react';
 import { AddWidgetData, WidgetData, WidgetType } from '../types/dashboard';
 import { isWithEmptyCellsEnabled } from '../utils/isWithEmptyCellsEnabled';
-import { mockDataSets } from '../utils/mock';
+import { getMockDataSets } from '../utils/mock';
 
 interface DashboardContextType {
   withEmptyCells: boolean;
@@ -19,7 +19,8 @@ export const DashboardContext = createContext<DashboardContextType | null>(null)
 
 export function DashboardProvider({ children }: DashboardProviderProps) {
   const withEmptyCells = isWithEmptyCellsEnabled();
-  const initial = sessionStorage.getItem('grid-items');
+  const storageKey = withEmptyCells ? 'grid-items-empty' : 'grid-items-full';
+  const initial = sessionStorage.getItem(storageKey);
   const [blocks, setBlocks] = useState<WidgetData[]>(initial ? JSON.parse(initial) : []);
 
   const handleAddBlock = async ({ type, name, description }: AddWidgetData) => {
@@ -28,7 +29,7 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
       type,
       name,
       description,
-      data: type !== 'text' && type !== 'empty' ? mockDataSets[type] : [],
+      data: type !== 'text' && type !== 'empty' ? getMockDataSets(type) : [],
     };
 
     let updatedBlocks = [...blocks];
@@ -47,9 +48,6 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
         const emptyBlocks: WidgetData[] = Array.from({ length: emptyCount }, () => ({
           id: `empty-${Date.now()}-${Math.random()}`,
           type: 'empty',
-          name: '',
-          description: '',
-          data: [],
         }));
         updatedBlocks = [...updatedBlocks, ...emptyBlocks];
       }
@@ -58,7 +56,7 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     }
 
     setBlocks(updatedBlocks);
-    sessionStorage.setItem('grid-items', JSON.stringify(updatedBlocks));
+    sessionStorage.setItem(storageKey, JSON.stringify(updatedBlocks));
   };
 
   const handleRemove = (id: string) => {

@@ -6,15 +6,13 @@ import { useDashboard } from '../../hooks';
 import { DraggableGridItemProps } from '../../types/dashboard';
 import { DragAndDropIcon, TrashIcon } from '../Icons';
 
-import BarChartWidget from '../Widgets/BarChartWidget';
-import LineChartWidget from '../Widgets/LineChartWidget';
-import SimpleTextWidget from '../Widgets/SimpleTextWidget';
+import { BarChartWidget, LineChartWidget, SimpleTextWidget } from '../Widgets';
 
 const WidgetBlock = {
   lineChart: LineChartWidget,
   barChart: BarChartWidget,
   text: SimpleTextWidget,
-  empty: () => <div className="emptyWidget" />,
+  empty: () => <div className="emptyWidget"/>,
 };
 
 export const DraggableGridItem = ({ item, isOverlay, handleRemove, activeItemId }: DraggableGridItemProps) => {
@@ -22,7 +20,7 @@ export const DraggableGridItem = ({ item, isOverlay, handleRemove, activeItemId 
 
   const animateLayoutChanges: AnimateLayoutChanges = ({ wasDragging, ...args }) => {
     if (item.type !== 'empty') return false;
-    return defaultAnimateLayoutChanges({  ...args, wasDragging: false });
+    return defaultAnimateLayoutChanges({ ...args, wasDragging: false });
   };
 
   const {

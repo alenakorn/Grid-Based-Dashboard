@@ -33,7 +33,7 @@ export const DraggableGrid = () => {
       activationConstraint: {
         distance: 15,
       },
-    })
+    }),
   );
 
   const handleDragStart = ({ active }: DragStartEvent) => {
@@ -89,7 +89,7 @@ export const DraggableGrid = () => {
 
       <DragOverlay>
         {activeItem ? (
-          <DraggableGridItem item={activeItem} handleRemove={handleRemove} isOverlay />
+          <DraggableGridItem item={activeItem} handleRemove={handleRemove} isOverlay/>
         ) : null}
       </DragOverlay>
     </DndContext>

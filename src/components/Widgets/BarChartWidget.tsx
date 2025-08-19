@@ -15,13 +15,13 @@ const BarChartWidget = ({ data, name, description }: WidgetData) => {
             left: -20,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#e07a5f" />
-          <Bar dataKey="uv" fill="#81b29a" />
+          <CartesianGrid strokeDasharray="3 3"/>
+          <XAxis dataKey="name"/>
+          <YAxis/>
+          <Tooltip/>
+          <Legend/>
+          <Bar dataKey="pv" fill="#e07a5f"/>
+          <Bar dataKey="uv" fill="#81b29a"/>
         </BarChart>
       </ResponsiveContainer>
     </>
