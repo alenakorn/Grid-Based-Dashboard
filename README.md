@@ -11,7 +11,7 @@ A React + TypeScript application that allows adding, moving, and deleting blocks
 git clone <repository-url>
 cd grid-based-dashboard
 
-# 2. Install dependencies
+# 2. Install pnpm
 npm i -g pnpm
 
 # 3. Install dependencies
