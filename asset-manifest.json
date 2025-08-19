@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Grid-Based-Dashboard/static/css/main.28d6bb30.css",
-    "main.js": "/Grid-Based-Dashboard/static/js/main.35f37556.js",
+    "main.css": "/Grid-Based-Dashboard/static/css/main.c3db4c60.css",
+    "main.js": "/Grid-Based-Dashboard/static/js/main.8528d71c.js",
     "index.html": "/Grid-Based-Dashboard/index.html",
-    "main.28d6bb30.css.map": "/Grid-Based-Dashboard/static/css/main.28d6bb30.css.map",
-    "main.35f37556.js.map": "/Grid-Based-Dashboard/static/js/main.35f37556.js.map"
+    "main.c3db4c60.css.map": "/Grid-Based-Dashboard/static/css/main.c3db4c60.css.map",
+    "main.8528d71c.js.map": "/Grid-Based-Dashboard/static/js/main.8528d71c.js.map"
   },
   "entrypoints": [
-    "static/css/main.28d6bb30.css",
-    "static/js/main.35f37556.js"
+    "static/css/main.c3db4c60.css",
+    "static/js/main.8528d71c.js"
   ]
 }
