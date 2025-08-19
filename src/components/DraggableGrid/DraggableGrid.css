@@ -1,0 +1,69 @@
+/* Grid */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+}
+
+/* Grid Item */
+.gridItem {
+  padding: 48px 32px 32px;
+  border-radius: 8px;
+  border: 1px solid #F4F1DE;
+  text-align: center;
+  font-weight: bold;
+  transition: background-color .3s;
+
+  position: relative;
+  min-height: 600px;
+  height: 100%;
+
+  &:hover {
+    .dragHandle,
+    .itemDeleteBtn {
+      display: block;
+    }
+  }
+}
+
+.gridItem.dragging {
+  opacity: 0.5;
+  background-color: #e9ecef;
+}
+
+.dragHandle,
+.itemDeleteBtn {
+  padding: 8px;
+  border: none;
+  background: none;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  transition: background-color .3s ease;
+  display: none;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    background-color: #F4F1DE;
+  }
+}
+
+.dragHandle {
+  left: 16px;
+  right: initial;
+
+  &:hover {
+    background-color: #F4F1DE;
+    cursor: grab;
+  }
+}

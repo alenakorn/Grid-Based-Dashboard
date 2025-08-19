@@ -4,8 +4,8 @@ import { mockDataSets } from '../utils/mock';
 
 interface DashboardContextType {
   blocks: WidgetData[];
-  gridSize: { cols: number };
   addBlock: (data: AddWidgetData) => void;
+  setBlocks: (data: WidgetData[]) => void;
   removeBlock: (blockId: string) => void;
 }
 
@@ -16,8 +16,8 @@ interface DashboardProviderProps {
 }
 
 export function DashboardProvider({ children }: DashboardProviderProps) {
-  const [blocks, setBlocks] = useState<WidgetData[]>([]);
-  const [gridSize] = useState({ cols: 3 });
+  const initial = sessionStorage.getItem('grid-items');
+  const [blocks, setBlocks] = useState<WidgetData[]>(initial ? JSON.parse(initial) : []);
 
   const addBlock = async ({ type, name, description }: AddWidgetData) => {
     const newBlock: WidgetData = {
@@ -29,7 +29,17 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
       data: mockDataSets[type] || [],
     };
 
-    setBlocks(prev => [...prev, newBlock]);
+    const updatedBlocks = [...blocks];
+    const emptyIndex = updatedBlocks.findIndex(b => b === null);
+
+    if (emptyIndex !== -1) {
+      updatedBlocks[emptyIndex] = newBlock;
+    } else {
+      updatedBlocks.push(newBlock);
+    }
+
+    setBlocks(updatedBlocks);
+    sessionStorage.setItem('grid-items', JSON.stringify(updatedBlocks));
   };
 
   const removeBlock = async (blockId: string) => {
@@ -38,9 +48,9 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
 
   const value: DashboardContextType = {
     blocks,
-    gridSize,
     addBlock,
     removeBlock,
+    setBlocks,
   };
 
   return (
