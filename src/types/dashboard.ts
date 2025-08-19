@@ -16,9 +16,10 @@ export interface ChartData {
   uv: number;
 }
 
-export interface GridProps {
-  items: WidgetData[];
-  columns: number;
+export interface DraggableGridItemProps {
+  item: WidgetData;
+  handleRemove: (id: string) => void;
+  isOverlay?: boolean;
 }
 
 export interface SimpleTextData {

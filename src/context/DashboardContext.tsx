@@ -24,18 +24,10 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
       type,
       name,
       description,
-      // @ts-ignore
-      data: mockDataSets[type] || [],
+      data: type !== 'text' ? mockDataSets[type] : [],
     };
 
-    const updatedBlocks = [...blocks];
-    const emptyIndex = updatedBlocks.findIndex(b => b === null);
-
-    if (emptyIndex !== -1) {
-      updatedBlocks[emptyIndex] = newBlock;
-    } else {
-      updatedBlocks.push(newBlock);
-    }
+    const updatedBlocks = [...blocks, newBlock];
 
     setBlocks(updatedBlocks);
     sessionStorage.setItem('grid-items', JSON.stringify(updatedBlocks));

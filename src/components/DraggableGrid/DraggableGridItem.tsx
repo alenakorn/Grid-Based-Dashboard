@@ -2,7 +2,7 @@ import React from 'react';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable, AnimateLayoutChanges, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
 
-import { WidgetData } from '../../types/dashboard';
+import { DraggableGridItemProps } from '../../types/dashboard';
 import { DragAndDropIcon, TrashIcon } from '../Icons';
 
 import BarChartWidget from '../Widgets/BarChartWidget';
@@ -15,13 +15,7 @@ const WidgetBlock = {
   text: SimpleTextWidget,
 };
 
-interface Props {
-  item: WidgetData;
-  handleRemove: (id: string) => void;
-  isOverlay?: boolean;
-}
-
-export const DraggableGridItem = ({ item, isOverlay, handleRemove }: Props) => {
+export const DraggableGridItem = ({ item, isOverlay, handleRemove }: DraggableGridItemProps) => {
   const animateLayoutChanges: AnimateLayoutChanges = (args) =>
     defaultAnimateLayoutChanges({ ...args, wasDragging: true });
 

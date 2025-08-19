@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { Modal } from '../index';
 import { useDashboard } from '../../hooks';
 import { AddWidgetData } from '../../types/dashboard';
-import { mockDataSets } from '../../utils/mock';
-import { Modal } from '../index';
+import { mockDataSets, textBlockData } from '../../utils/mock';
 
 import './AddWidgetAction.css';
 
@@ -68,7 +68,7 @@ const AddWidgetAction = () => {
               placeholder="Enter widget description"
               required={widgetType === 'text'}
               maxLength={widgetType !== 'text' ? 100 : 600}
-              defaultValue={widgetType === 'text' ? mockDataSets.textBlocks : ''}
+              defaultValue={widgetType === 'text' ? textBlockData : ''}
               rows={5}
             />
           </div>
