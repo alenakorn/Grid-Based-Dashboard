@@ -1,4 +1,5 @@
-import { Bar, BarChart, CartesianGrid, Legend, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { memo } from 'react';
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { WidgetData } from '../../types/dashboard';
 
 const BarChartWidget = ({ data, name, description }: WidgetData) => {
@@ -27,4 +28,4 @@ const BarChartWidget = ({ data, name, description }: WidgetData) => {
   );
 };
 
-export default BarChartWidget;
+export default memo(BarChartWidget);

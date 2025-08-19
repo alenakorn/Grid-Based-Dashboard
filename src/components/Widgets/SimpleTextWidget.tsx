@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { SimpleTextData } from '../../types/dashboard';
 
 const SimpleTextWidget = ({ name, description }: SimpleTextData) => {
@@ -9,4 +11,4 @@ const SimpleTextWidget = ({ name, description }: SimpleTextData) => {
   );
 };
 
-export default SimpleTextWidget;
+export default memo(SimpleTextWidget);

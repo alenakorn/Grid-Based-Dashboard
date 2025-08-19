@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { WidgetData } from '../../types/dashboard';
 
@@ -26,4 +27,4 @@ const LineChartWidget = ({data, name, description }: WidgetData) => {
   );
 };
 
-export default LineChartWidget;
+export default memo(LineChartWidget);

@@ -6,12 +6,14 @@ import { Modal } from '../index';
 
 import './AddWidgetAction.css';
 
-const AddWidgetAction = () => {
-  const { addBlock } = useDashboard();
-  const [isOpen, setIsOpen] = useState(false);
-  const [widgetType, setWidgetType] = useState('barChart');
+const DEFAULT_WIDGET_TYPE = 'barChart';
 
-  const handleSubmitNewWidget = async (e: React.FormEvent<HTMLFormElement>) => {
+const AddWidgetAction = () => {
+  const { handleAddBlock } = useDashboard();
+  const [isOpen, setIsOpen] = useState(false);
+  const [widgetType, setWidgetType] = useState(DEFAULT_WIDGET_TYPE);
+
+  const handleSubmitNewWidget = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
@@ -21,18 +23,25 @@ const AddWidgetAction = () => {
       description: formData.get('description'),
     };
 
-    await addBlock(data as AddWidgetData);
+    handleAddBlock(data as AddWidgetData);
     setIsOpen(false);
   };
 
   return (
     <div className="addWidgetActionContainer">
-      <button className="addWidgetBtn" onClick={() => setIsOpen(true)}>Add new widget</button>
+      <button className="addWidgetBtn" onClick={() => setIsOpen(true)}>
+        Add new widget
+      </button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Add new widget">
         <form className="addWidgetForm" onSubmit={handleSubmitNewWidget}>
           <div>
             <label htmlFor="type">Type</label>
-            <select id="type" name="type" defaultValue="barChart" onChange={(e) => setWidgetType(e.target.value)}>
+            <select
+              id="type"
+              name="type"
+              defaultValue={DEFAULT_WIDGET_TYPE}
+              onChange={(e) => setWidgetType(e.target.value)}
+            >
               <option value="barChart" label="Bar chart" />
               <option value="lineChart" label="Line chart" />
               <option value="text" label="Simple text block" />
@@ -41,7 +50,14 @@ const AddWidgetAction = () => {
 
           <div>
             <label htmlFor="name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Enter widget name" required={widgetType === 'text'} maxLength={50} />
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Enter widget name"
+              required={widgetType === 'text'}
+              maxLength={50}
+            />
           </div>
 
           <div>

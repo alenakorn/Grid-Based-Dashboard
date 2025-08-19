@@ -15,14 +15,18 @@
   text-align: center;
   font-weight: bold;
   transition: box-shadow .3s;
+  background-color: #fff;
 
   position: relative;
   min-height: 600px;
   height: 100%;
 
+  display: flex;
+  flex-direction: column;
+
   &:hover {
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-    .dragHandle,
+    .itemDragBtn,
     .itemDeleteBtn {
       display: flex;
     }
@@ -30,11 +34,31 @@
 }
 
 .gridItem.dragging {
-  opacity: 0.5;
-  background-color: #e9ecef;
+  filter: blur(2px);
+  border: 3px dashed #f7f5f2;
+  background-image: repeating-linear-gradient(
+      45deg,
+      rgba(247, 245, 242, 0.4),
+      rgba(247, 245, 242, 0.4) 12px,
+      rgba(255, 255, 255, 0.4) 12px,
+      rgba(255, 255, 255, 0.4) 24px
+  );
+
+  .itemDragBtn,
+  .itemDeleteBtn {
+    display: none;
+  }
 }
 
-.dragHandle,
+.gridItem.overlay {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+
+  .itemDeleteBtn {
+    display: none;
+  }
+}
+
+.itemDragBtn,
 .itemDeleteBtn {
   padding: 8px;
   border: none;
@@ -61,7 +85,7 @@
   }
 }
 
-.dragHandle {
+.itemDragBtn {
   left: 16px;
   right: initial;
 

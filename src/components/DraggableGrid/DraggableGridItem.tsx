@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSortable, AnimateLayoutChanges, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useSortable, AnimateLayoutChanges, defaultAnimateLayoutChanges } from '@dnd-kit/sortable';
 
 import { WidgetData } from '../../types/dashboard';
 import { DragAndDropIcon, TrashIcon } from '../Icons';
@@ -17,10 +17,11 @@ const WidgetBlock = {
 
 interface Props {
   item: WidgetData;
-  onRemove: (id: string) => void;
+  handleRemove: (id: string) => void;
+  isOverlay?: boolean;
 }
 
-export const DraggableGridItem = ({ item, onRemove }: Props) => {
+export const DraggableGridItem = ({ item, isOverlay, handleRemove }: Props) => {
   const animateLayoutChanges: AnimateLayoutChanges = (args) =>
     defaultAnimateLayoutChanges({ ...args, wasDragging: true });
 
@@ -41,19 +42,28 @@ export const DraggableGridItem = ({ item, onRemove }: Props) => {
   const WidgetComponent = WidgetBlock[item.type];
 
   return (
-    <li
-      ref={setNodeRef}
-      className={`gridItem ${isDragging ? 'dragging' : ''}`}
-      style={style}
-      {...attributes}
-    >
-      <div className="dragHandle" {...listeners}>
-        <DragAndDropIcon/>
-      </div>
-      <button className="itemDeleteBtn" onClick={() => onRemove(item.id)}>
-        <TrashIcon/>
-      </button>
-      <WidgetComponent {...item} />
-    </li>
+    <>
+      <li
+        style={style}
+        ref={setNodeRef}
+        className={[
+          'gridItem',
+          isDragging && 'dragging',
+          isOverlay && 'overlay',
+        ].filter(Boolean).join(' ')}
+        {...attributes}
+      >
+        <div className="itemDragBtn" {...listeners}>
+          <DragAndDropIcon/>
+        </div>
+        <button
+          className="itemDeleteBtn"
+          onClick={() => handleRemove(item.id)}
+        >
+          <TrashIcon/>
+        </button>
+        <WidgetComponent {...item} />
+      </li>
+    </>
   );
 };

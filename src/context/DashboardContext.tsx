@@ -4,25 +4,24 @@ import { mockDataSets } from '../utils/mock';
 
 interface DashboardContextType {
   blocks: WidgetData[];
-  addBlock: (data: AddWidgetData) => void;
+  handleAddBlock: (data: AddWidgetData) => void;
   setBlocks: (data: WidgetData[]) => void;
-  removeBlock: (blockId: string) => void;
 }
-
-export const DashboardContext = createContext<DashboardContextType | null>(null);
 
 interface DashboardProviderProps {
   children: ReactNode;
 }
 
+export const DashboardContext = createContext<DashboardContextType | null>(null);
+
 export function DashboardProvider({ children }: DashboardProviderProps) {
   const initial = sessionStorage.getItem('grid-items');
   const [blocks, setBlocks] = useState<WidgetData[]>(initial ? JSON.parse(initial) : []);
 
-  const addBlock = async ({ type, name, description }: AddWidgetData) => {
+  const handleAddBlock = async ({ type, name, description }: AddWidgetData) => {
     const newBlock: WidgetData = {
-      type,
       id: `block-${Date.now()}-${Math.random()}`,
+      type,
       name,
       description,
       // @ts-ignore
@@ -42,15 +41,10 @@ export function DashboardProvider({ children }: DashboardProviderProps) {
     sessionStorage.setItem('grid-items', JSON.stringify(updatedBlocks));
   };
 
-  const removeBlock = async (blockId: string) => {
-    setBlocks(prev => prev.filter(block => block.id !== blockId));
-  };
-
   const value: DashboardContextType = {
     blocks,
-    addBlock,
-    removeBlock,
     setBlocks,
+    handleAddBlock,
   };
 
   return (
