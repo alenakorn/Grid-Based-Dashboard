@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Grid-Based-Dashboard/static/css/main.28d6bb30.css",
+    "main.js": "/Grid-Based-Dashboard/static/js/main.35f37556.js",
+    "index.html": "/Grid-Based-Dashboard/index.html",
+    "main.28d6bb30.css.map": "/Grid-Based-Dashboard/static/css/main.28d6bb30.css.map",
+    "main.35f37556.js.map": "/Grid-Based-Dashboard/static/js/main.35f37556.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.28d6bb30.css",
+    "static/js/main.35f37556.js"
+  ]
+}
