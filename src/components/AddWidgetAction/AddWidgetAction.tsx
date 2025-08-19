@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Modal } from '../index';
 import { useDashboard } from '../../hooks';
 import { AddWidgetData } from '../../types/dashboard';
-import { mockDataSets, textBlockData } from '../../utils/mock';
+import { textBlockData } from '../../utils/mock';
 
 import './AddWidgetAction.css';
 
